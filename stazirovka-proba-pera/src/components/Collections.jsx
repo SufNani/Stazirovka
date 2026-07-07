@@ -1,3 +1,4 @@
+import './Collections.css'
 function Collections(){
     return(
         <section>

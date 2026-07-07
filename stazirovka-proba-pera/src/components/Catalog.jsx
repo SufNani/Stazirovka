@@ -1,3 +1,4 @@
+import EventCard from './EventCard'
 function Catalog(){
     const events = [
         {
