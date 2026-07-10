@@ -6,40 +6,65 @@ import './Auth.css'
 function Login(){
     const navigate=useNavigate()
 
-    function handleSubmit(event){
-        event.preventDefault()
+    function handleSubmit(e){
+        e.preventDefault()
 
         navigate('/organizer')
     }
 
     return (
-        <main className='auth-page'>
-            <form className='auth-card'>
+        <div className='auth-page'>
+
+           <div className='auth-container'>
                 <h1>Вход в аккаунт</h1>
-                <p>Добро пожаловать!</p>
 
-                 <label>
-                    Телефон
-                    <input type='tel' placeholder='Введите номер телефона'/>
-                </label>
+                <p className='subtitle'>
+                    Добро пожаловать!
+                </p>
 
-                <label>
-                    Пароль
-                    <input type='password' placeholder='Введите пароль'/>
-                </label>
+                <form onSubmit={handleSubmit}>
 
-                <button type='submit'>Войти</button>
+                    <div className='input-group'>
 
-                <link to='/register' className='auth-link'>
+                        <label>Телефон</label>
+
+                        <input
+                        type='tel'
+                        placeholder='Введите номер'
+                        />
+
+                    </div>
+
+                    <div className='input-group'>
+                        <label>Пароль</label>
+                            <input 
+                            type='password'
+                            placeholder='Введите пароль'
+                            />
+
+                    </div>
+
+                    <button className='login-btn'>
+                        Войти
+                    </button>
+                </form>
+
+                <Link
+                    to='/forgot'
+                    className='forgot-password'
+                >
                     Забыли пароль?
-                </link>
+                </Link>
 
-                <link to='/register' className='auth-button'>
+                <Link
+                to='/register'
+                className='register-btn'
+                >
                     Зарегистрироваться
-                </link>
-            </form>
-        </main>
-    )
+                </Link>
+           </div>
+        </div>
+    );
 }
 
 export default Login
