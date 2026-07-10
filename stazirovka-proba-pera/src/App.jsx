@@ -16,13 +16,12 @@ import OrganizerAccount from './pages/OrganizerAccount'
 
 function App(){
   return (
-    <>
-    <Header/>
-    <Hero/>
-    <Collections/>
-    <Catalog/>
-    <Footer/>
-    </>
+    <Routes>
+      <Route path='/' element={<Home/>}/>
+      <Route path='/login' element={<Login/>}/>
+      <Route path='/register' element={<Register/>}/>
+      <Route path='/organizer' element={<OrganizerAccount/>}/>
+    </Routes>
   )
 }
 

@@ -28,7 +28,7 @@ function OrganizerAccount(){
                 </div>
 
                 <button>Мои события</button>
-                <button>+ Создание событие</button>
+                <button>+ Создать событие</button>
                 <button>Профиль</button>
                 <button>Настройки</button>
                 <button>Избранное</button>

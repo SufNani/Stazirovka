@@ -1,20 +1,27 @@
+import {Link} from 'react-router-dom'
 import './Header.css'
 function Header(){
     return(
         <header className="header">
-            <div className="logo">
-                <img src=""></img>
-                <h1></h1>
-            </div>
+            <Link to='/' className='logo'>
+                <span>КалендАрт</span>
+            </Link>
 
-            <nav className="nav">
-                <a href='#'>Каталог</a>
-                <a href='#'>Подборки</a>
-                <a href='#'>Контакты</a>
+            <nav>
+                <Link to='/catalog'>Каталог</Link>
+                <a href='#collection'>Подборки</a>
+                <a href='#contacts'>Контакты</a>
             </nav>
 
-            <button className="login">Вход</button>
-            <button className="sign_up">Регистрация</button>
+            <div className='header-actions'>
+                <Link to='/login' className='login'>
+                    Вход
+                </Link>
+
+                <Link to='/register' className='sign-up'>
+                    Регистрация
+                </Link>
+            </div>
         </header>
     )
 }

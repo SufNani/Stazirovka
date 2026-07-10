@@ -1,7 +1,17 @@
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import './Auth.css'
 
+
+
 function Login(){
+    const navigate=useNavigate()
+
+    function handleSubmit(event){
+        event.preventDefault()
+
+        navigate('/organizer')
+    }
+
     return (
         <main className='auth-page'>
             <form className='auth-card'>

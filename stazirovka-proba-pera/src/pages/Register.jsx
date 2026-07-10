@@ -20,12 +20,12 @@ function Register(){
 
                  <label>
                     Пароль
-                    <input type='passsword' placeholder='Введите пароль'/>
+                    <input type='password' placeholder='Введите пароль'/>
                 </label>
 
                 <label>
                     Повтор пароля
-                    <input type='passsword' placeholder='Повторно введите пароль'/>
+                    <input type='password' placeholder='Повторно введите пароль'/>
                 </label>
 
 
