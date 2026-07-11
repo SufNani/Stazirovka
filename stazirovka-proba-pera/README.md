@@ -1,18 +1,133 @@
-# React + Vite
+# КалендАрт — фронтенд MVP
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Веб-сервис онлайн-записи на мероприятия для организаторов мастер-классов, кружков и занятий.
+Это **только фронтенд** (React + Vite). Бэкенда нет — все данные берутся из моков в `src/data/`,
+а действия (запись, создание события, вход) реализованы как заглушки.
 
-Currently, two official plugins are available:
+Дизайн перенесён с утверждённых макетов заказчика: кремовый фон, горчичный акцент,
+глубокий фиолетовый. Палитра и типографика вынесены в токены и переиспользуются везде.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Запуск
 
-## React Compiler
+```bash
+npm install
+npm run dev        # дев-сервер (http://localhost:5173)
+npm run build      # прод-сборка в dist/
+npm run preview    # предпросмотр прод-сборки
+```
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Требуется Node.js 18+.
 
-Note: This will impact Vite dev & build performances.
+## Стек
 
-## Expanding the ESLint configuration
+- **React 18** + **Vite 5**
+- **react-router-dom 6** — маршрутизация
+- Чистый CSS с дизайн-токенами (переменные CSS). UI-библиотека не подключалась,
+  чтобы точно попасть в макет; при желании команда может завести любую поверх токенов.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Структура
+
+```
+src/
+├── main.jsx                 # точка входа
+├── App.jsx                  # маршруты + прокрутка
+├── styles/                  # дизайн-система
+│   ├── tokens.css           #   цвета, шрифты, радиусы, тени
+│   ├── base.css             #   reset + типографика + утилиты
+│   ├── components.css        #   кнопки, карточки, фильтры, формы, календарь
+│   ├── layout.css           #   шапка, футер, боковое меню
+│   └── pages.css            #   стили конкретных страниц
+├── data/
+│   ├── events.js            # события, категории, города, цены + хелперы
+│   └── site.js              # подборки, интересы, мок-пользователи
+├── components/
+│   ├── layout/              # Header, Footer, SiteLayout
+│   ├── ui/                  # Icon, Logo, Cover, Calendar, FilterDropdown, хук
+│   ├── cabinet/             # Sidebar кабинета
+│   ├── EventCard.jsx        # карточка каталога
+│   ├── FilterBar.jsx        # панель фильтров
+│   └── CatalogSection.jsx   # секция каталога с фильтрацией и пагинацией
+└── pages/
+    ├── LandingPage.jsx      # лендинг: герой + подборки + каталог
+    ├── CatalogPage.jsx      # каталог (читает ?category)
+    ├── EventPage.jsx        # публичная страница + выбор сеанса + запись
+    ├── BookingConfirmPage.jsx
+    ├── AuthPage.jsx         # вход / регистрация (организатор/участник)
+    ├── InfoPages.jsx        # контакты, о платформе, 404
+    ├── client/              # кабинет клиента
+    ├── organizer/           # кабинет, создание события, участники
+    └── admin/               # модерация
+```
+
+## Маршруты
+
+| Путь | Экран |
+|---|---|
+| `/` | Лендинг (герой, подборки, каталог) |
+| `/catalog` | Каталог с фильтрами (`?category=...`) |
+| `/event/:slug` | Публичная страница события + форма записи |
+| `/booking-confirmed` | Подтверждение записи |
+| `/login` | Вход / регистрация |
+| `/client` | Кабинет клиента |
+| `/organizer` | Кабинет организатора (события + календарь) |
+| `/organizer/create` | Создание / редактирование события |
+| `/organizer/event/:slug` | Детали события + список участников + экспорт CSV |
+| `/admin` | Панель администратора |
+| `/contacts`, `/about` | Информационные страницы |
+
+## Что реализовано (по ТЗ и брифу)
+
+- **Каталог** с рабочими фильтрами: категория, дата (мини-календарь), цена, город.
+- **Публичная запись клиента**: выбор сеанса, уменьшение свободных мест, форма
+  (имя + контакт + согласие на ПДн), страница подтверждения.
+- **Кабинет организатора**: список событий со статусами, календарь с отметками,
+  форма создания события, страница участников с экспортом в CSV.
+- **Кабинет клиента**: «Мои события», интересы (вкл/выкл).
+- **Вход/регистрация** для двух ролей, чек-бокс согласия на ПДн.
+- **Админка**: модерация организаторов (блокировка) и событий.
+- Адаптивность (смартфон/планшет/десктоп), видимый фокус, `prefers-reduced-motion`.
+
+## Создание событий (кабинет организатора)
+
+Форма `/organizer/create` — рабочая. Организатор заполняет название, категорию,
+город, дату/время, длительность, места, цену и описание, затем «Опубликовать»
+(или «Сохранить черновик»). Событие сразу появляется:
+
+- в таблице **Мои события** (`/organizer`),
+- в общем **каталоге** (если опубликовано, не черновик),
+- по своей публичной ссылке `/event/:slug`, где клиенты могут записаться.
+
+Есть валидация полей и удаление событий (кнопка корзины в таблице).
+
+Всё это работает **без бэкенда**. События хранятся в React-контексте
+`src/store/EventsContext.jsx`, а созданные организатором — дополнительно
+в `localStorage` (ключи `kalendart:created-events`, `kalendart:hidden-events`),
+чтобы переживать перезагрузку. Это демо-персистентность: почистить можно так —
+
+```js
+localStorage.removeItem('kalendart:created-events')
+localStorage.removeItem('kalendart:hidden-events')
+```
+
+## Как подключить бэкенд
+
+Всё, что сейчас берётся из `src/data/` и `src/store/`, нужно заменить на запросы к API:
+
+1. `EventsContext` (`events`, `getEvent`, `addEvent`, `removeEvent`) → вместо
+   сида и `localStorage` дёргать `GET /events`, `POST /events`, `DELETE /events/:id`.
+   Компоненты (каталог, кабинет, страницы события) уже читают данные через
+   хук `useEvents()`, поэтому их менять не придётся — только начинку провайдера.
+2. Форма записи в `EventPage.jsx` (функция `submit`) → `POST /bookings`.
+3. Форма в `CreateEventPage.jsx` уже собирает объект через `makeEvent()` и
+   вызывает `addEvent()` — замените тело `addEvent` на `POST /events`.
+4. `AuthPage.jsx` (функция `submit`) → авторизация по телефону и хранение сессии.
+5. `CURRENT_USER` / `ORGANIZER` → данные текущего пользователя из профиля.
+
+Обложки событий сейчас рисуются тематическим градиентом (компонент `Cover`).
+Как только появится поле `image` с URL, `Cover` автоматически покажет фото.
+
+## Замечания по дизайну
+
+- Все цвета и шрифты — только через переменные из `styles/tokens.css`.
+  Меняете токен — меняется весь сайт.
+- Заглушки авторизации: любой вход ведёт в кабинет выбранной роли (без проверки).
