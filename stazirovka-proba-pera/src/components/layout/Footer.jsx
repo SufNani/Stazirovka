@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
 import Icon from '../ui/Icon'
 import logo from '../../assets/logo.png'
+import instagramIcon from '../../assets/icons/instagram.png'
+import vkIcon from '../../assets/icons/vk.png'
+import telegramIcon from '../../assets/icons/telegram.png'
 
 const SUPPORT = [
   'Служба поддержки: +7 (999) 123-45-67 (круглосуточно)',
@@ -30,20 +33,22 @@ export default function Footer() {
           <Link to="/about">О платформе</Link>
         </nav>
 
-        <div className="kt-footer__socials">
-          <a className="kt-footer__social" href="#" aria-label="Instagram">
-            <Icon name="instagram" size={26} />
-            Instagram
-          </a>
-          <a className="kt-footer__social" href="#" aria-label="ВКонтакте">
-            <Icon name="vk" size={26} />
-            ВКонтакте
-          </a>
-          <a className="kt-footer__social" href="#" aria-label="Telegram">
-            <Icon name="telegram" size={26} />
-            Telegram
-          </a>
-        </div>
+              <div className="kt-footer__socials">
+        <a className="kt-footer__social" href="#" aria-label="Instagram">
+          <img src={instagramIcon} width="26" height="26" alt="Instagram" />
+          Instagram
+        </a>
+
+        <a className="kt-footer__social" href="#" aria-label="ВКонтакте">
+          <img src={vkIcon} width="26" height="26" alt="ВКонтакте" />
+          ВКонтакте
+        </a>
+
+        <a className="kt-footer__social" href="#" aria-label="Telegram">
+          <img src={telegramIcon} width="26" height="26" alt="Telegram" />
+          Telegram
+        </a>
+      </div>
 
         <div className="kt-footer__cols">
           <ul className="kt-footer__col">

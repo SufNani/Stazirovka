@@ -5,7 +5,25 @@
    градиент (см. компонент Cover).
    ============================================================ */
 
+
+
+import painting from "../assets/events/painting.png";
+import desserts from "../assets/events/desserts.png";
+import yoga from "../assets/events/yoga.png";
+import pottery from "../assets/events/pottery.png";
+import film from "../assets/events/film.png";
+import dance from "../assets/events/dance.png";
+import books from "../assets/events/books.png";
+import concert from "../assets/events/concert.png";
+import candles from "../assets/events/candles.png";
+import festival from "../assets/events/festival.png";
+import conference from "../assets/events/conference.png";
+import art from "../assets/events/art.png";
+
+
+
 // Категории — из выпадающего меню «Категория» в макете
+
 export const CATEGORIES = [
   'Творчество и хобби',
   'Кулинария и еда',
@@ -83,6 +101,7 @@ const s = (id, label, dayLabel, timeLabel, free, total) => ({
 export const EVENTS = [
   {
     id: 1,
+    image: painting,
     slug: 'risovanie-interernyh-kartin',
     title: 'Мастер-класс по рисованию интерьерных картин',
     org: 'Арт-угол',
@@ -105,6 +124,7 @@ export const EVENTS = [
   },
   {
     id: 2,
+    image: desserts,
     slug: 'poleznye-deserty',
     title: 'Учимся печь полезные десерты',
     org: 'Сладкий домик',
@@ -127,7 +147,9 @@ export const EVENTS = [
   {
     id: 3,
     slug: 'utrennyaya-yoga',
+    image: yoga,
     title: 'Утренняя йога на берегу с чаепитием',
+
     org: 'Дыхание и спокойствие',
     orgInitials: 'ДС',
     category: 'Здоровье и саморазвитие',
@@ -148,6 +170,7 @@ export const EVENTS = [
   {
     id: 4,
     slug: 'lepka-iz-gliny',
+    image: pottery,
     title: 'Мастер-класс по лепке из глины (создаём чашку)',
     org: 'Гончарная мастерская «art day»',
     orgInitials: 'ГМ',
@@ -168,6 +191,7 @@ export const EVENTS = [
   },
   {
     id: 5,
+    image: film,
     slug: 'kinovecher',
     title: 'Киновечер: фильм + уютные разговоры',
     org: 'Киноклуб «НОЧЬ КИНО»',
@@ -186,6 +210,7 @@ export const EVENTS = [
   },
   {
     id: 6,
+    image: dance,
     slug: 'tancevalnyy-intensiv',
     title: 'Танцевальный интенсив (контемпорари)',
     org: 'Dance academy',
@@ -207,6 +232,7 @@ export const EVENTS = [
   },
   {
     id: 7,
+    image: books,
     slug: 'knizhnyy-klub',
     title: 'Читаем и обсуждаем современную прозу',
     org: 'Книжный клуб «BOOKS»',
@@ -225,6 +251,7 @@ export const EVENTS = [
   },
   {
     id: 8,
+    image: concert,
     slug: 'zhivoy-zvuk-koncert',
     title: 'Концерт живой музыки на открытом воздухе',
     org: 'Живой звук',
@@ -243,6 +270,7 @@ export const EVENTS = [
   },
   {
     id: 9,
+    image: candles,
     slug: 'svechi-iz-voska',
     title: 'Создаём свечи из натурального воска',
     org: 'Свет и воск',
@@ -264,6 +292,7 @@ export const EVENTS = [
   },
   {
     id: 10,
+    image: festival,
     slug: 'muzykalnyy-festival',
     title: 'Музыкальный фестиваль',
     org: 'Сад «Эрмитаж»',
@@ -282,6 +311,7 @@ export const EVENTS = [
   },
   {
     id: 11,
+    image: conference, 
     slug: 'biznes-konferenciya',
     title: 'Бизнес-конференция',
     org: 'Технопарк',
@@ -300,6 +330,7 @@ export const EVENTS = [
   },
   {
     id: 12,
+    image: art,
     slug: 'art-vecherinka',
     title: 'Арт-вечеринка',
     org: 'Арт пространство',
