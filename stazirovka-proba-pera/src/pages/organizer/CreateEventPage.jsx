@@ -11,7 +11,7 @@ const empty = {
   city: '',
   address: '',
   date: '',
-  time: '',
+  time: '', 
   duration: '',
   seats: '',
   price: '',
@@ -24,12 +24,34 @@ export default function CreateEventPage() {
   const [form, setForm] = useState(empty)
   const [toast, setToast] = useState('')
   const [error, setError] = useState('')
+  const [extraDates, setExtraDates] = useState([])
 
   function set(key, value) {
     setForm((f) => ({ ...f, [key]: value }))
     if (error) setError('')
   }
 
+      function addDate() {
+      setExtraDates((prev) => [
+        ...prev,
+        {
+          date: '',
+          time: '',
+        },
+      ])
+    }
+
+    function updateExtraDate(index, key, value) {
+      setExtraDates((prev) =>
+        prev.map((item, i) =>
+          i === index ? { ...item, [key]: value } : item
+        )
+      )
+    }
+
+function removeExtraDate(index) {
+  setExtraDates((prev) => prev.filter((_, i) => i !== index))
+}
   function validate(publish) {
     if (!form.title.trim()) return 'Укажите название события.'
     if (!publish) return '' // черновик можно сохранить только с названием
@@ -124,7 +146,7 @@ export default function CreateEventPage() {
               ))}
             </select>
           </div>
-
+                     
           <div className="kt-field">
             <label className="kt-field__label" htmlFor="ce-city">
               Город
@@ -170,6 +192,60 @@ export default function CreateEventPage() {
             />
           </div>
 
+      {extraDates.map((item, index) => (
+        <div
+          key={index}
+          className="kt-formgrid--full"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr auto',
+            gap: 12,
+            marginBottom: 16,
+            alignItems: 'end',
+            
+          }}
+        >
+          <div className="kt-field">
+            <label className="kt-field__label">
+              Дополнительная дата
+            </label>
+
+            <input
+              type="date"
+              className="kt-input"
+              value={item.date}
+              onChange={(e) =>
+                updateExtraDate(index, 'date', e.target.value)
+              }
+            />
+          </div>
+
+          <div className="kt-field">
+            <label className="kt-field__label">
+              Время
+            </label>
+
+            <input
+              type="time"
+              required
+              className="kt-input"
+              value={item.time}
+              onChange={(e) =>
+                updateExtraDate(index, 'time', e.target.value)
+              }
+            />
+          </div>
+
+          <button
+            type="button"
+            className="kt-btn kt-btn--ghost"
+            onClick={() => removeExtraDate(index)}
+          >
+            ✕
+          </button>
+        </div>
+      ))}
+
           <div className="kt-field">
             <label className="kt-field__label" htmlFor="ce-time">
               Время начала
@@ -182,6 +258,21 @@ export default function CreateEventPage() {
               onChange={(e) => set('time', e.target.value)}
             />
           </div>
+       
+       <div className="kt-formgrid--full" style={{ marginTop: -6, marginBottom: 16 }}>
+        <button
+          type="button"
+          className="kt-btn kt-btn--ghost"
+          onClick={addDate}
+          style={{
+            background: '#634788',
+            color: '#fce293',
+            border: '1px solid #7B5AA6',
+          }}
+        >
+          + Добавить дату
+        </button>
+      </div>
 
           <div className="kt-field">
             <label className="kt-field__label" htmlFor="ce-dur">
@@ -198,7 +289,7 @@ export default function CreateEventPage() {
               placeholder="3"
             />
           </div>
-
+               
           <div className="kt-field">
             <label className="kt-field__label" htmlFor="ce-seats">
               Количество мест
