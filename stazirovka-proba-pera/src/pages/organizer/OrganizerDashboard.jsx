@@ -11,13 +11,14 @@ const NAV = [
   { key: 'create', label: 'Создание события' },
   { key: 'profile', label: 'Профиль' },
   { key: 'settings', label: 'Настройки' },
+  { key: 'history', label: 'История событий' },
 ]
 
 const STATUS_CLASS = { published: 'kt-status--pub', draft: 'kt-status--draft', done: 'kt-status--done' }
 
 export default function OrganizerDashboard() {
   const navigate = useNavigate()
-  const { myEvents, removeEvent } = useEvents()
+  const { myEvents, historyEvents, removeEvent } = useEvents()
   const [active, setActive] = useState('events')
 
   const markedDates = new Set(myEvents.map((e) => e.date))
@@ -60,6 +61,7 @@ export default function OrganizerDashboard() {
           </Link>
         </div>
 
+      {active === 'events' && (
         <div className="kt-cabsection kt-orggrid">
           {/* Календарь */}
           <div className="kt-panel" style={{ background: 'var(--kt-purple)', color: 'var(--kt-on-purple)' }}>
@@ -146,6 +148,43 @@ export default function OrganizerDashboard() {
             </table>
           </div>
         </div>
+                )}
+
+        {active === 'history' && (
+          <div className="kt-panel" style={{marginTop: 50}}>
+            <h2 style={{ marginBottom: 30 }}>История событий</h2>
+
+            {historyEvents.length === 0 ? (
+              <p>У вас пока нет завершённых событий.</p>
+            ) : (
+              <table className="kt-table">
+                <thead>
+                  <tr>
+                    <th>Событие</th>
+                    <th>Дата</th>
+                    <th>Город</th>
+                    <th>Статус</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {historyEvents.map((e) => (
+                    <tr key={e.id}>
+                      <td>{e.title}</td>
+                      <td>{e.dateLabel}</td>
+                      <td>{e.city}</td>
+                      <td>
+                        <span className="kt-status kt-status--done">
+                          Завершено
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        )}
       </div>
     </div>
   )

@@ -77,17 +77,41 @@ export function EventsProvider({ children }) {
     })
   }, [])
 
-  const value = useMemo(
-    () => ({
-      events,
-      myEvents: events.filter((e) => e.mine),
-      publishedEvents: events.filter((e) => e.status !== 'draft'),
-      getEvent: (slug) => events.find((e) => e.slug === slug),
-      addEvent,
-      removeEvent,
+ const value = useMemo(
+  () => ({
+    events,
+
+    myEvents: events.filter((e) => {
+      if (!e.mine) return false
+
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+
+      const eventDate = new Date(e.date)
+      eventDate.setHours(0, 0, 0, 0)
+
+      return eventDate >= today
     }),
-    [events, addEvent, removeEvent]
-  )
+
+    historyEvents: events.filter((e) => {
+      if (!e.mine) return false
+
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+
+      const eventDate = new Date(e.date)
+      eventDate.setHours(0, 0, 0, 0)
+
+      return eventDate < today
+    }),
+
+    publishedEvents: events.filter((e) => e.status !== 'draft'),
+    getEvent: (slug) => events.find((e) => e.slug === slug),
+    addEvent,
+    removeEvent,
+  }),
+  [events, addEvent, removeEvent]
+)
 
   return <EventsContext.Provider value={value}>{children}</EventsContext.Provider>
 }
