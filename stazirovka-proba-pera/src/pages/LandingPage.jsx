@@ -15,7 +15,7 @@ function CollectionCard({ c }) {
         <p className="kt-collection__text">{c.text}</p>
         <button
           className="kt-btn kt-btn--gold kt-btn--sm"
-          onClick={() => navigate(`/catalog?category=${encodeURIComponent(c.category)}`)}
+          onClick={() => navigate(`/collections${c.id}`)}
         >
           Смотреть все события
         </button>
@@ -50,6 +50,7 @@ export default function LandingPage() {
       <section className="kt-section" id="collections">
         <div className="kt-container">
           <h2 className="kt-section__title">Подборки</h2>
+          <Link to="/collections" className="kt-btn kt-btn--gold kt-btn--sm">Все подборки</Link>
           <p className="kt-section__lead">
             Найдите свой идеальный мастер-класс или событие! Нажимайте на интересную тему — и
             КалендАрт покажет все доступные занятия, чтобы вы могли выбрать то, что по душе

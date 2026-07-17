@@ -27,7 +27,7 @@ export default function Footer() {
         </div>
 
         <nav className="kt-footer__nav">
-          <Link to="/#collections">Подборки</Link>
+          <Link to="/collections">Подборки</Link>
           <Link to="/catalog">Каталог</Link>
           <Link to="/contacts">Контакты</Link>
           <Link to="/about">О платформе</Link>

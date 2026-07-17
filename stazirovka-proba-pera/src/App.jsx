@@ -12,6 +12,7 @@ import OrganizerDashboard from './pages/organizer/OrganizerDashboard'
 import CreateEventPage from './pages/organizer/CreateEventPage'
 import EventDetailsPage from './pages/organizer/EventDetailsPage'
 import AdminPage from './pages/admin/AdminPage'
+import CollectionsPage from './pages/CollectionsPage'
 import { ContactsPage, AboutPage, NotFoundPage } from './pages/InfoPages'
 
 /** При смене маршрута прокручиваем вверх; при наличии #hash — к секции. */
@@ -45,7 +46,8 @@ export default function App() {
           <Route path="/organizer" element={<OrganizerDashboard />} />
           <Route path="/organizer/create" element={<CreateEventPage />} />
           <Route path="/organizer/event/:slug" element={<EventDetailsPage />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/collections" element={<CollectionsPage/>} />
+          <Route path="/collections/:id" element={<CollectionsPage />} />
           <Route path="/contacts" element={<ContactsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<NotFoundPage />} />

@@ -4,7 +4,7 @@ import Logo from '../ui/Logo'
 import Icon from '../ui/Icon'
 
 const NAV = [
-  { to: '/#collections', label: 'Подборки' },
+  { to: '/collections', label: 'Подборки' },
   { to: '/catalog', label: 'Каталог' },
   { to: '/contacts', label: 'Контакты' },
   { to: '/about', label: 'О платформе' },
@@ -24,7 +24,7 @@ export default function Header() {
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `kt-header__link ${isActive && item.to !== '/#collections' ? 'is-active' : ''}`
+                `kt-header__link ${isActive && item.to !== '/collections' ? 'is-active' : ''}`
               }
             >
               {item.label}
