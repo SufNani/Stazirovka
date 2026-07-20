@@ -1,18 +1,19 @@
 import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 
-import SiteLayout from './components/layout/SiteLayout'
-import LandingPage from './pages/LandingPage'
-import CatalogPage from './pages/CatalogPage'
-import EventPage from './pages/EventPage'
-import BookingConfirmPage from './pages/BookingConfirmPage'
-import AuthPage from './pages/AuthPage'
-import ClientDashboard from './pages/client/ClientDashboard'
-import OrganizerDashboard from './pages/organizer/OrganizerDashboard'
-import CreateEventPage from './pages/organizer/CreateEventPage'
-import EventDetailsPage from './pages/organizer/EventDetailsPage'
-import AdminPage from './pages/admin/AdminPage'
-import CollectionsPage from './pages/CollectionsPage'
+import SiteLayout from './components/layout/SiteLayout';
+import LandingPage from './pages/LandingPage';
+import CatalogPage from './pages/CatalogPage';
+import EventPage from './pages/EventPage';
+import BookingConfirmPage from './pages/BookingConfirmPage';
+import AuthPage from './pages/AuthPage';
+import ClientDashboard from './pages/client/ClientDashboard';
+import OrganizerDashboard from './pages/organizer/OrganizerDashboard';
+import CreateEventPage from './pages/organizer/CreateEventPage';
+import EventDetailsPage from './pages/organizer/EventDetailsPage';
+import AdminPage from './pages/admin/AdminPage';
+import CollectionsPage from './pages/CollectionsPage';
+import OrganizerLandingPage from './pages/OrganizerLandingPage';
 import { ContactsPage, AboutPage, NotFoundPage } from './pages/InfoPages'
 
 /** При смене маршрута прокручиваем вверх; при наличии #hash — к секции. */
@@ -50,6 +51,7 @@ export default function App() {
           <Route path="/collections/:id" element={<CollectionsPage />} />
           <Route path="/contacts" element={<ContactsPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/organizer-landing" element={<OrganizerLandingPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
