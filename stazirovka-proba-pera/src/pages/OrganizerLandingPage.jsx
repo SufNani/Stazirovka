@@ -33,30 +33,104 @@ export default function OrganizerLandingPage() {
       </section>
 
 
-      <section className="register">
+            <section className="register">
 
-        <div className="register-title">
+        <h2>Зарегистрируйтесь</h2>
 
-          <h2>Зарегистрируйтесь</h2>
+        <p>
+          создавай и находи события в своём городе!
+        </p>
 
-          <span>
-            — создавай и находи события в своём городе!
-          </span>
+        <div className="cards">
 
-        </div>
+          {/* Регистрация */}
+          <div className="card register-card">
 
-        <div className="register-cards">
+            <div className="register-window">
 
-          <div className="register-card">
-            <div className="image"></div>
+              <input
+                type="text"
+                placeholder="Имя"
+              />
+
+              <input
+                type="email"
+                placeholder="E-mail"
+              />
+
+              <input
+                type="password"
+                placeholder="Пароль"
+              />
+
+              <button className="yellow-btn">
+                Регистрация
+              </button>
+
+            </div>
+
           </div>
 
-          <div className="register-card">
-            <div className="image"></div>
+          {/* Возможности */}
+          <div className="card">
+
+            <div className="feature-list">
+
+              <div className="feature-item">
+                ✓ Создание мероприятий
+              </div>
+
+              <div className="feature-item">
+                ✓ Продажа билетов
+              </div>
+
+              <div className="feature-item">
+                ✓ Аналитика
+              </div>
+
+              <div className="feature-item">
+                ✓ Управление участниками
+              </div>
+
+            </div>
+
           </div>
 
-          <div className="register-card">
-            <div className="image"></div>
+          {/* Карта */}
+          <div className="card payment-card">
+
+            <div className="bank-card">
+
+              <div className="bank-title">
+                Банковская карта
+              </div>
+
+              <input
+                type="text"
+                placeholder="1234 5678 9012 3456"
+              />
+
+              <div className="bank-row">
+
+                <input
+                  type="text"
+                  placeholder="MM/YY"
+                />
+
+                <input
+                  type="text"
+                  placeholder="CVV"
+                />
+
+              </div>
+
+              <input
+                type="text"
+                placeholder="Имя владельца"
+              />
+
+            </div>
+
           </div>
 
         </div>
